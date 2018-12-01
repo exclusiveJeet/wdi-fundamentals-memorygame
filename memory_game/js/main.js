@@ -28,26 +28,65 @@ var cardsInPlay = [];
 
 var checkForMatch = function()
 {
-
+	var length = cardsInPlay.length;
+	console.log("Length "+length);
+  if(cardsInPlay.length >= 3)
+  {
 	if (cardsInPlay[0] === cardsInPlay[1])
-	{
-		alert("You found a match!");
-	}
-	else 
 		{
-		alert("Sorry, try again.");
+			alert("You found a match!");
+			location.reload(true);
 		}
+	else
+		{
+			alert("Sorry! Try Again");
+			location.reload(true);
+			//document.getElementById("Id",cId).setAttribute("src","images/back.png");
+		}
+	}
+
+	
 }
 
-var flipCard = function(cardID)
+var flipCard = function()
 {
+	var cardID = this.getAttribute("id");
+		console.log(cardID);
+	
 
-	console.log("User flipped " + cards[cardID].rank);
 	cardsInPlay.push(cards[cardID].rank);
 
-	console.log(cards[cardID].rank + " - "+cards[cardID].cardImage);
+	this.setAttribute("src",cards[cardID].cardImage);
 	checkForMatch();
 }
 
-flipCard(0);
-flipCard(2);
+
+//Creating a random board
+
+var creatBoard = function(){
+
+	var cardElement;
+	for(var i=0; i<cards.length; i++)
+	{
+		cardElement = document.createElement('img');
+		console.log(cardElement);
+		cardElement.setAttribute("src", "images/back.png");
+		cardElement.addEventListener("click", flipCard);
+		cardElement.setAttribute("id",i);
+		document.getElementById("game-board").appendChild(cardElement);
+
+	}
+
+}
+
+creatBoard();
+
+
+
+
+
+
+
+
+
+
